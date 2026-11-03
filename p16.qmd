@@ -1,0 +1,10 @@
+---
+title: "p16"
+author: "Gabe Cirker"
+format: 
+  html:
+    embed-resources: true
+  typst: default
+---
+
+I will write my text analysis here. 
