@@ -7,4 +7,36 @@ format:
   typst: default
 ---
 
-I will write my text analysis here. 
+```{r setup}
+# install.packages("tidytext")
+# install.packages("gutenbergr)
+
+library(tidyverse)
+library(tidytext)
+library(gutenbergr)
+```
+
+```{r import}
+# Relativity: The Special and General Theory by Albert Einstein
+# Source: https://www.gutenberg.org/ebooks/30155
+# Download the text with the Project Gutenberg header and footer removed
+df_text <- gutenberg_download(
+  30155,
+  mirror = "https://mirrors.xmission.com/gutenberg"
+) |> 
+  mutate(line = row_number())
+
+df_text
+```
+
+```{r tidy-text}
+# Split the text into words and keep the original line numbers
+# unnest_tokens() also makes words lowercase and removes punctuation
+df_tidy <- df_text |>
+  unnest_tokens(word, text)
+
+df_tidy
+
+# Count the rows in the tidy data frame
+nrow(df_tidy)
+```
